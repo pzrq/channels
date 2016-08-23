@@ -53,6 +53,9 @@ and post the square of it to the ``"result"`` channel::
 
     class MyTests(ChannelTestCase):
         def test_a_thing(self):
+            def my_consumer(message):
+                Channel('result').send({'value': message['value'] ** 2})
+
             # Inject a message onto the channel to use in a consumer
             Channel("input").send({"value": 33})
             # Run the consumer with the new Message object
